@@ -1,0 +1,167 @@
+<head>
+    <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">
+</head>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<style>
+/*
+@media (min-width: 1281px) {
+    .nav-sidemenu-mobile, .navbar-mobile{
+        display: none;
+    }
+
+}
+@media screen and (max-width: 768px) {
+    .navbar{
+        display: none;
+    }
+}
+*/
+</style>
+
+<div id="nav">
+<nav class="navbar">
+    <ul class="nav-logo">
+    <img src="/media/logo.png" alt="logo" style="width:40px; height:40px;"> <a>마이커리어</a>
+    {% if user.is_authenticated %}
+    <li class="nav-link"><a>{{ user.username }}님 안녕하세요!</a></li>
+    {% else %}
+    {% endif %}
+
+    <li><a href="/blog/">취업게시판</a></li>
+    <li><a href="/nopage/">교육게시판</a></li>
+    </ul>
+
+    <ul class="nav-profile-btn">
+        {% if user.is_authenticated %}
+        <li class="profile_button"><i class="fas fa-user fa-2x"></i></li>
+        {% else %}
+        <li class="profile_button"><a style="font-family: 'Noto Sans KR', sans-serif; font-size:1.6rem; font-weight:500;" href="{% url 'main:login' %}">로그인</a></li>
+        {% endif %}
+    </ul>
+
+    <div class="nav-profile">
+        <div class="nav-profile-list">
+            <img src={% if user.profile.profile_photo %}"{{ user.profile.profile_photo.url }}"{% else %}"https://i.stack.imgur.com/34AD2.jpg"{% endif %}
+            style="border-radius: 50%;" alt="profile_photo" width="100" height="100"><br>
+            <span>{{ user.username }}</span><br>
+            <span>{{ user.email }}</span><br>
+            <span>{{ user.profile.university }}{{Profile}}</span><br>
+            <button onclick="location.href='/{{ user.id }}/change_profile'">회원정보 수정하기</button>
+        </div>
+
+        <div class="nav-profile-list2">
+            <li><a href="/consult2">상담신청 목록조회</a></li>
+            <li><a class="nav-link" href="/add/mark">즐겨찾기</a></li>
+        </div>
+        
+        <div class="nav-profile-logout">
+            <a href="{% url 'main:logout' %}">로그아웃</a>
+        </div>
+        </div>
+    </div>
+</nav>
+
+<!-- mobile version Navbar-->
+<nav class="navbar-mobile">
+    <ul class="nav-logo-mobile">
+        <img src="/media/logo.png" alt="logo" style="width:45px; height:45px;"> <a class="navbar-brand" href="/">마이커리어</a>
+    </ul>
+    <ul class="nav-menu-mobile">
+        <li class="mobile_menu"><i class="fas fa-bars fa-2x"></i></li>
+    </ul>
+</nav>
+
+<!-- ----------사이드 메뉴---------- -->
+
+<script>
+
+    $(document).ready(function(){
+        
+        /*
+        var profileBtn = 0;
+        $('.profile_button>i').on('click', function(){
+            profileBtn = 1 ;
+            $('.nav-profile').show();
+            console.log(profileBtn);
+
+            return profileBtn;
+        });
+        */
+        // 모바일 이상 버전일때
+        $('.profile_button>i').on('click', function(){
+            if ($('.nav-profile').css('display')=='none'){
+                $('.nav-profile').show();
+            }else{
+                $('.nav-profile').hide();
+            };
+        });
+
+        $('profile_button>i').on('click', function(){
+            if (profileBtn == 1) {
+                $('.nav-profile').hide();
+                return 0;
+            };
+            console.log(profileBtn);
+        });
+        
+        // 모바일 버전일때
+        $('.mobile_menu>i').on('click', function(){
+            $('.nav-sidemenu-background').show();
+            $('.nav-sidemenu-mobile').show().animate({
+                right:0
+            });
+        });
+
+        $('.nav-sidemenu-mobile-close-btn>i').on('click', function(){
+            $('.nav-sidemenu-background').hide();
+            $('.nav-sidemenu-mobile').show().animate({
+                right: '-' + 50 + '%'
+                    },function(){
+            $('.nav-sidemenu-mobile').hide();
+            });
+        });
+    });
+</script>
+
+<div class="nav-sidemenu-background"></div>
+<nav class="nav-sidemenu-mobile">
+    <div class="nav-sidemenu-mobile-close-btn">
+        <i class="fas fa-times fa-2x"></i>
+    </div>
+    {% if user.is_authenticated %}
+    <ul class="nav-sidemenu-list">
+        <div class="nav-sidemenu-profileImg">
+            <img src={% if profile.profile.profile_photo %}"{{ profile.profile.profile_photo.url }}"{% else %}"https://i.stack.imgur.com/34AD2.jpg"{% endif %} 
+            style="border-radius: 50%;" alt="profile_photo" width="80" height="80">
+        </div>
+        <div class="nav-sidemenu-profileList">
+            <span>{{ user.username }}</span><br>
+            <span>{{ user.email }}</span><br>        
+            <span>대학교 : {{ profile.profile.university | default_if_none:'' }}</span><br>
+        </div>
+
+        <div class="nav-sidemenu-profile-menu">
+            <li><a href="/consult2">상담신청 목록조회</a></li>
+            <li><a class="nav-link" href="/add/mark">즐겨찾기</a></li>
+            <li><a href="1/change_profile">회원정보 수정</a></li>
+        </div>
+
+        <div class="nav-sidemenu">
+            <li><a href="/blog/">취업게시판</a></li>
+            <li><a href="/nopage/">교육게시판</a></li>
+        </div>
+        <div class="nav-sidemenu-logout">
+            <i class="far fa-sign-out fa-2x"></i> <a href="{% url 'main:logout' %}">로그아웃</a>
+        </div>
+        {% else %}
+        <a style="font-family: 'Noto Sans KR', sans-serif; font-size:1.6rem; font-weight:500;" href="{% url 'main:login' %}">로그인</a>
+
+        <div class="nav-sidemenu">
+            <li><a href="/blog/">취업게시판</a></li>
+            <li><a href="/nopage/">교육게시판</a></li>
+        </div>
+        {% endif %}
+    </ul>
+</nav>
+</div>
+

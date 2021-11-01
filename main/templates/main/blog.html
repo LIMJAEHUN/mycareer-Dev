@@ -1,0 +1,256 @@
+{%extends "main/base.html"%}
+{% load static %}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  {% csrf_token %}
+  <style>
+  body{
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    background-color: #f7f7f7
+  }
+  input[type="checkbox"] {
+    display: none;
+  }
+  label {
+    display: inline-block;
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: none;
+    border: solid 1px #ccc;
+    transition: 0.25s;
+    padding: 6px 18px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin: 3px;
+  }
+  input[type="checkbox"]:checked + label {
+    background: #1b5ac2;
+    color: #fff;
+  }
+</style>
+<!--채용공고 상세검색-->
+<a style="font-family: 'Do Hyeon', sans-serif; font-weight:500; font-size:3rem;">취업게시판 채용공고</a><br>
+<a style="font-weight:bold;font-size:1.6rem;">채용중인 기업을 확인하세요.</a>
+  <div class = "check_box">
+    <script type="text/javascript" src="{% static 'js/chekbox.js' %}"></script>
+    <form class="check_box_form" action="{% url 'main:search' %}" method="post">
+      {% csrf_token %}
+      <a>직무</a>
+      <div class="job" style="overflow-x: scroll; white-space: nowrap;">
+        <input type="checkbox" name="jtags" value="경영" id="id_tags_1">
+        <label for="id_tags_1">경영</label>
+        <input type="checkbox" name="jtags" value="마케팅" id="id_tags_2">
+        <label for="id_tags_2">마케팅</label>
+        <input type="checkbox" name="jtags" value="디자인" id="id_tags_3" >
+        <label for="id_tags_3">디자인</label>
+        <input type="checkbox" name="jtags" value="유통" id="id_tags_4" >
+        <label for="id_tags_4">유통</label>
+        <input type="checkbox" name="jtags" value="IT" id="id_tags_5">
+        <label for="id_tags_5">IT</label>
+        <input type="checkbox" name="jtags" value="서비스" id="id_tags_6" >
+        <label for="id_tags_6">서비스</label>
+        <input type="checkbox" name="jtags" value="연구 및 개발" id="id_tags_7" >
+        <label for="id_tags_7">연구 및 개발</label>
+      </div>
+
+      <a>지역</a>
+      <div class="region" style="overflow-x: scroll; white-space: nowrap;">
+        <input type="checkbox" name="atags" value="서울" id="id_tags_9" onclick="CountChecked(this)">
+        <label for="id_tags_9">서울특별시</label>
+        <input type="checkbox" name="atags" value="인천광역시" id="id_tags_10" onclick="CountChecked(this)">
+        <label for="id_tags_10">인천광역시</label>
+        <input type="checkbox" name="atags" value="대전" id="id_tags_11" onclick="CountChecked(this)">
+        <label for="id_tags_11">대전광역시</label>
+        <input type="checkbox" name="atags" value="광주" id="id_tags_12" onclick="CountChecked(this)">
+        <label for="id_tags_12">광주광역시</label>
+        <input type="checkbox" name="atags" value="대구" id="id_tags_13" onclick="CountChecked(this)">
+        <label for="id_tags_13">대구광역시</label>
+        <input type="checkbox" name="atags" value="부산" id="id_tags_14" onclick="CountChecked(this)">
+        <label for="id_tags_14">부산광역시</label>
+        <input type="checkbox" name="atags" value="울산" id="id_tags_15" onclick="CountChecked(this)">
+        <label for="id_tags_15">울산광역시</label>
+        <input type="checkbox" name="atags" value="제주특별자치도" id="id_tags_16" onclick="CountChecked(this)">
+        <label for="id_tags_16">제주특별자치도</label>
+      </div>
+
+      <a>우대사항</a>
+        <div class="preferential" style="overflow-x: scroll; white-space: nowrap;">
+          <input type="checkbox" name="etags" value="청년우대" id="id_tags_17" onclick="CountChecked(this)">
+          <label for="id_tags_17">청년우대</label>
+          <input type="checkbox" name="etags" value="경력우대" id="id_tags_18" onclick="CountChecked(this)">
+          <label for="id_tags_18">경력우대</label>
+          <input type="checkbox" name="etags" value="우대" id="id_tags_19" onclick="CountChecked(this)">
+          <label for="id_tags_19">우대</label>
+          <input type="checkbox" name="etags" value="신입" id="id_tags_20" onclick="CountChecked(this)">
+          <label for="id_tags_20">신입</label>
+        </div>
+        <div class="search-form">
+          <input class="search-input" type="search" placeholder="" aria-label="Search" name="kw" value="{{kw}}">
+          <button class="search-btn" type=submit>선택 조건으로 검색</button>
+          <button class="search-btn-mobile" type=submit><i class="fas fa-search"></i></button>
+          <div class="reset-btn"><a style="margin-left: 0; font-weight:100;">조건 초기화</a></div>
+          <div class="reset-btn-mobile"><i style="margin-left: 0;" class="fas fa-undo-alt"></i></div>
+
+        </div>
+    </form>
+    
+    </div>
+
+<script>
+  /* input 조건 선택된 체크박스 전부다 해제하는 스크립트*/
+  /* 조건 초기화 버튼*/
+  $('.reset-btn>a').on('click', function(){
+    $("input:checkbox[id='id_tags_1']").prop("checked", false);
+    $("input:checkbox[id='id_tags_1']").prop("checked", false);
+    $("input:checkbox[id='id_tags_2']").prop("checked", false);
+    $("input:checkbox[id='id_tags_3']").prop("checked", false);
+    $("input:checkbox[id='id_tags_4']").prop("checked", false);
+    $("input:checkbox[id='id_tags_5']").prop("checked", false);
+    $("input:checkbox[id='id_tags_6']").prop("checked", false);
+    $("input:checkbox[id='id_tags_7']").prop("checked", false);
+    $("input:checkbox[id='id_tags_8']").prop("checked", false);
+    $("input:checkbox[id='id_tags_9']").prop("checked", false);
+    $("input:checkbox[id='id_tags_10']").prop("checked", false);
+    $("input:checkbox[id='id_tags_11']").prop("checked", false);
+    $("input:checkbox[id='id_tags_12']").prop("checked", false);
+    $("input:checkbox[id='id_tags_13']").prop("checked", false);
+    $("input:checkbox[id='id_tags_14']").prop("checked", false);
+    $("input:checkbox[id='id_tags_15']").prop("checked", false);
+    $("input:checkbox[id='id_tags_16']").prop("checked", false);
+    $("input:checkbox[id='id_tags_17']").prop("checked", false);
+    $("input:checkbox[id='id_tags_18']").prop("checked", false);
+    $("input:checkbox[id='id_tags_19']").prop("checked", false);
+    $("input:checkbox[id='id_tags_20']").prop("checked", false);
+    console.log("조건을 초기화 했습니다.");
+  });
+
+  $('.reset-btn-mobile>i').on('click', function(){
+    $("input:checkbox[id='id_tags_1']").prop("checked", false);
+    $("input:checkbox[id='id_tags_1']").prop("checked", false);
+    $("input:checkbox[id='id_tags_2']").prop("checked", false);
+    $("input:checkbox[id='id_tags_3']").prop("checked", false);
+    $("input:checkbox[id='id_tags_4']").prop("checked", false);
+    $("input:checkbox[id='id_tags_5']").prop("checked", false);
+    $("input:checkbox[id='id_tags_6']").prop("checked", false);
+    $("input:checkbox[id='id_tags_7']").prop("checked", false);
+    $("input:checkbox[id='id_tags_8']").prop("checked", false);
+    $("input:checkbox[id='id_tags_9']").prop("checked", false);
+    $("input:checkbox[id='id_tags_10']").prop("checked", false);
+    $("input:checkbox[id='id_tags_11']").prop("checked", false);
+    $("input:checkbox[id='id_tags_12']").prop("checked", false);
+    $("input:checkbox[id='id_tags_13']").prop("checked", false);
+    $("input:checkbox[id='id_tags_14']").prop("checked", false);
+    $("input:checkbox[id='id_tags_15']").prop("checked", false);
+    $("input:checkbox[id='id_tags_16']").prop("checked", false);
+    $("input:checkbox[id='id_tags_17']").prop("checked", false);
+    $("input:checkbox[id='id_tags_18']").prop("checked", false);
+    $("input:checkbox[id='id_tags_19']").prop("checked", false);
+    $("input:checkbox[id='id_tags_20']").prop("checked", false);
+  });
+</script>
+
+  <div class="sidebar">
+    <a>내가 찜한 공고</a>
+
+    <div id="favorite" style="background-color: #f7f7f7; text-decoration: none;">
+        {% for mark_items in mark_items %}
+    <tr class="text-left">
+        <th width = "-100">
+          <a href="/blog/{{MarkItem.MainPost_id }}">
+          <span>{{mark_items.MainPost.id}}</span>
+          <span>{{mark_items.MainPost.postname}}</span>
+          <br/>
+          {% if mark_items.MainPost.rogophoto %}
+          <img style="object-fit : contain;" class="logo_img"src = "{{ mark_items.MainPost.rogophoto.url }}" alt="" height ="30" width=" 30">
+          {% endif %}
+
+            {% endfor %}
+    </div>
+    <div class="adfit">
+      <ins class="kakao_ad_area" style="display:none; width:100%; height:100%;float:right; z-index: 1;"
+      data-ad-unit    = "DAN-BtpnqjB0bCMUgHQJ"
+      data-ad-width   = "320"
+      data-ad-height  = "100"> </ins>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+          <div class="col-12" >
+            <table class="table" >
+              <tbody>
+                {% for Mainpost in postlist %}
+                <tr class="text-left">
+                    <th style="vertical-align: middle; background-color:#fff; text-align:center; border-right: 1px solid #ddd;" width="200">
+                          {% if Mainpost.rogophoto %}
+                        <img class="logo_img"src = "{{ Mainpost.rogophoto.url }}" alt="" width="120">
+                        {% endif %}
+                    </th>
+
+                    <th style="vertical-align: middle;" width = "800">
+                      <a href="/blog/{{ Mainpost.id }}">
+                      <span>{{ Mainpost.num }}</span>
+                      <span id="{{Mainpost.pk}}">{{ Mainpost.postname|truncatechars:30 }}</span>
+                      <br>
+                      <span style="line-height: 3.6rem; text-overflow: ellipsis; overflow:hidden;">{{ Mainpost.author }}</span>
+                      <br>
+                      <span style="line-height: 3.6rem; text-overflow: ellipsis; overflow:hidden;">{{ Mainpost.job }}</span>
+                      <br>
+                      <span style="line-height: 3.6rem; text-overflow: ellipsis; overflow:hidden;">{{ Mainpost.etc }}</span>
+                      <br>
+                      <span style="line-height: 3.6rem; text-overflow: ellipsis; overflow:hidden;">{{ Mainpost.created_date | date:"Y-m-d h:i" }}</span>
+                      </a>
+                      
+                    </th>
+                    <th style="vertical-align: top; text-align: right;" width="80">
+                      <a class="star-icon" href="{% url 'mark:add_mark' Mainpost.id %}">☆</a>
+                      <br>
+                      <p style="padding-top:4rem;"><a href="{% url 'mark:delete' Mainpost.id %}">삭제</a></p>
+                      </th>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+    <div class="col-12">
+      <nav style="font-size: 1.6rem; font-family: 'Noto Sans KR', sans-serif;" aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          {% if postlist.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?p={{ postlist.previous_page_number }}"
+              ><</a
+            >
+          </li>
+          {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#"><</a>
+          </li>
+          {% endif %}
+       <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link" href="?p=1">1</a></li>
+        <li class="page-item"><a class="page-link" href="?p=2">2</a></li>
+        <li class="page-item"><a class="page-link" href="?p=3">3</a></li>
+      </ul>
+          </li>
+          {% if postlist.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?p={{ postlist.next_page_number }}">></a>
+          </li>
+          {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#">></a>
+          </li>
+
+
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+{% endblock %}

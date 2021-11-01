@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>마이 커리어</title>
+  
+  <link rel = "stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+  <link rel = "stylesheet" href="{% static 'css/checkbox.css'%}">
+  <link rel = "stylesheet" href="{% static 'css/style.css'%}">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+  <!-- 구글웹 폰트 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic:wght@400;700&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+  
+  <script src="https://kit.fontawesome.com/51db22a717.js" crossorigin="anonymous"></script>
+  <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+
+<script>
+// 익스플로러(Internet Explorer) 체크
+var agent = navigator.userAgent.toLowerCase();
+if ( (navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1) ) {
+  alert("인터넷 익스플로러 브라우저로 접속하셨습니다. 해당 브라우저에서는 정상작동하지 않습니다. 크롬, 웨일, 파이어폭스, 엣지 브라우저를 사용해주세요.");
+}
+</script>
+<body>
+  <!-- NAV 부분 설정 -->
+  {% include 'main/navbar.html' %}
+  <!-- NAV 부분 끝 -->
+
+  <!-- SECTION 부분 설정 -->
+  <div class = "section">
+    {% block content %}
+    {% endblock %}
+  <!-- SECTION 부분 끝-->
+  </div>
+
+  
+  <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+
+</body>
+</html>

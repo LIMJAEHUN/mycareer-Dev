@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>개인회원가입(개인정보 수집안내)</title>
+  </head>
+  <style>
+    <!-- 현재페이지 CSS 초기화-->
+    *{margin: 0;padding: 0;box-sizing: border-box}
+    body{background-color: #f7f7f7;}
+    .clearfix::after{content: "";display: block;clear: both;}
+    em {
+        font-style: normal;
+    }
+
+    .privacy-form{
+        width: 96%;
+        height: 350px;
+        margin-top: 5px;
+        margin-left: 10px;
+        margin-bottom: 15px;
+        background-color: #f7f7f7;
+        color: #888;
+        font-size: 15px;
+        font-weight: 500;
+        border: none;
+        resize: none;
+        overflow: auto;
+    }
+
+    .agree-form{
+        padding: 5px;
+        margin-bottom: 15px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+    }
+    .agree-box a{
+        margin-left: 10px;
+        font-weight: bold;
+        font-size: 20px;
+        color: #888;
+
+    }
+
+
+    .signup-main-frame{
+        position: absolute;
+        width: 40%;
+        margin: 50px auto 100px 550px;
+        
+    }
+    .signup-title{
+        height: fit-content;
+        text-align: center;
+        color: #888;
+        border-bottom: 2px solid #ddd;
+        margin-bottom: 15px;
+    }
+
+    .signup-form{
+        padding: 10px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+    }
+    .form-group input{
+        background-color: #fff;
+        font-size: 20px;
+        text-indent: 4px;
+        margin: 5px 0px 20px 20px;
+        width: 450px;
+        height: 40px;
+        border: 1px solid #ddd;
+        border-radius: 1px;
+        background-color: transparent;
+        outline: 0;
+    }
+    .form-group a{
+        font-size: 20px;
+        margin: 40px 0px 20px 20px;
+        color: #888;
+    }
+
+    .account_btn{
+        margin: 15px 0 50px 0;
+        width: 750px;
+        height: 100px;
+        border: none;
+        font-size: 30px;
+        background-color: lightsalmon;
+        color: #fff
+    }
+    </style>
+
+    <div class="signup-main-frame">
+        <div class="signup-title"> <h2>개인회원가입</h2> </div>
+
+        <div class=agree-form>
+            <form action="" id="agree-form">
+                <div class="agree-box">
+                    <a>개인정보 수집 및 이용에 대한 안내</a> <br>
+                    <div class = "privacy-form">
+                        {% include "main/signup_privacy.html" %}
+                        </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="signup-form">
+            <form method="post" class="post-form">
+            {% csrf_token %}
+            {% include "main/form_errors.html"%}
+            <div class="form-group">
+                <a>아이디를 입력해주세요.</a><br>
+                <input type="text" class="form-control" name="username" id="username" placeholder="" value="{{ form.username.value|default_if_none:'' }}">
+            </div>
+
+            <div class='form-group'>
+                <a>비밀번호를 입력해주세요.(영문, 특수문자 포함)</a><br>
+                <input type="password" class="form-control" name="password1" id="password1" placeholder="" value="{{ form.password1.value|default_if_none:'' }}">
+            </div>
+            
+            <div class="form-group">
+                <a>비밀번호를 한번더 입력해주세요.</a><br>
+                <input type="password" class="form-control" name="password2" id="password2" placeholder="" value="{{ form.password2.value|default_if_none:'' }}">
+            </div>
+
+            <div class="form-group">
+                <a>이메일을 입력해주세요.(아이디 찾기에 필요.)</a><br>
+                <input type="text" class="form-control" name="email" id="email" placeholder="" value="{{ form.email.value|default_if_none:'' }}">
+            </div>
+
+            <div class="form-group">
+                <a>대학교를 입력해주세요.</a><br>
+                <input type="text" class="form-control" name="school" id="school" placeholder="" value="{{ form.school.value|default_if_none:'' }}">
+            </div>
+        </div>
+        <button type="submit" class="account_btn">가입하기</button>
+            </form>
+    </div>
+</body>
+</html>

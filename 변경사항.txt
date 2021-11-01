@@ -1,0 +1,19 @@
+1. 메인페이지 시작하기 버튼 수정
+- 비로그인 상태일경우 버튼 클릭시 로그인페이지로 이동
+- 로그인 상태일경우 버튼 클릭시 취업게시판(blog.html)로 이동
+
+2. 상담하기 게시판 추가
+- 비로그인시 상담하기 게시판 접근 불가능
+- models.py의 mainconsult db의 내용을 게시판 형태로 불러옴
+- views.py, urls.py 에 상담하기 게시판 url 규칙 추가
+
+3. profile 기능 추가
+- 단순히 페이지 추가만 해놓은 상황 (프로필 연동 x, html과 css로 꾸며놓은 상태)
+
+4. 상담하기 버튼 부분수정
+- 주소를 Mainpost.point_id 로 받아서 신청하게 변경
+
+5. DB부분 수정
+- mainpost 부분에서 컬럼 추가 -> point_id (회사 번호 구분)
+- mainconsult부분에서 컬럼 추가 -> point_id (회사 번호 구분)
+-models.py 컬럼 2개 추가(mainpost, mainconsult)

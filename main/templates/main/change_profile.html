@@ -1,0 +1,123 @@
+{%extends "main/base.html"%}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+<style>
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+}
+
+form > a {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 5px 0 15px 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.container{
+    width :500px;
+    height: 790px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding : 10px;
+    text-overflow:ellipsis;
+}
+.container p {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    margin-left: 20px;
+    text-overflow:ellipsis;
+}
+
+.container input[type=checkbox]{
+    width: 15px;
+    height: 15px;
+    text-overflow:ellipsis;
+}
+.container label{
+    font-size: 20px;
+    font-weight: bold;
+    text-overflow:ellipsis;
+}
+.container input[type="file" i]{
+    border: 0;
+    margin-left: 10px;
+    margin-top: 0;
+    font-size: 18px;
+    width: fit-content;
+    box-sizing: border-box;
+    text-overflow:ellipsis;
+}
+
+.container input{
+    position: relative;
+    margin: 5px 0 15px 15px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    max-width: 450px;
+    width: 450px;
+    text-indent: 3px;
+    text-overflow:ellipsis;
+}
+
+.change-submit-btn{
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: -20px 10px 10px 15px;
+    width: 450px;
+    height: 60px;
+    border: none;
+    border-radius: 10px;
+    background-color: #1b5ac2;
+    color: #fff;
+    text-align: center;
+    text-indent: 0px;
+    box-shadow: 0 4px 16px rgba(0,79,255,0.3);
+    transition:0.3s;
+}
+button:hover{
+    background: rgba(0,79,255,0.9);
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,79,255,0.6);
+}
+.change-submit-btn a{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+    margin: 5px;
+    font-size: 30px;
+}
+.profile_photo_div{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+    margin-left: 20px;
+    text-overflow:ellipsis;
+    overflow: hidden;
+    
+}
+</style>
+
+    <h2 class="text-center" style="font-family: 'Do Hyeon', sans-serif;">회원정보 수정하기</h2>
+
+    <div class="container">
+    <form method="POST" enctype="multipart/form-data">
+    <!-- 파일을 업로드할 때 form method는 POST여야하고 enctype을 multipart/form-data로 설정해야 한다. -->
+        {% csrf_token %}
+        <a>이메일 주소</a> <br>{{user_change_form.email}}<br>
+        <a>닉네임</a><br>{{profile_form.nickname}}<br>
+        <a>이름</a><br>{{user_change_form.last_name}}<div style="display : none;">{{user_change_form.first_name}}</div><br>
+        <a>전화번호</a><br>{{profile_form.phone_number}}<br>
+        <a>대학교</a><br>{{profile_form.university}}<br>
+        <a>프로필사진</a><br><p>가로,세로 250 x 250 사진을 업로드해주세요.</p>
+        <div class="profile_photo_div">
+            {{profile_form.profile_photo}}
+        </div> <br>
+        
+        <button type="submit" class="change-submit-btn"><a>저장하기</a></button>
+    </form>
+</div>
+{% endblock %}

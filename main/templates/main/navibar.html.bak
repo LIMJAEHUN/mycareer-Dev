@@ -1,0 +1,82 @@
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<style>
+  .modal{ 
+    position:absolute;
+    width:300px;
+    height:50%;
+    border-radius: 15px;
+    /**/
+    background: rgba(255, 255, 255, 0.8);
+    top:0;
+    left:600px;
+    display:none; }
+
+</style>
+<div id ="nav">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+      <img src="/media/logo.png" alt="logo" style="width:45px; height:45px;"> <a class="navbar-brand" href="/">마이커리어</a>
+      {% if user.is_authenticated %}
+      <a class="nav-link" href="{%url "main:profile" user.id %}">{{ user.username }}님 안녕하세요! [프로필 정보]</a>
+      <a id="profile-modal">▼</a>
+      {% else %}
+      <a class="nav-link" href="{% url 'main:login' %}">로그인</a>
+
+      {% endif %}
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item ">
+              <li><a class="nav-link" href="/blog/">취업게시판</a></li>
+              <li><a class="nav-link" href="/consult2">상담신청 목록조회</a></li>
+              <li><a class="nav-link" href="{% url 'mark:mark' %}">즐겨찾기</a></li>
+              {% if user.is_authenticated %}
+              <li><a class="nav-link" href="/admin/">글 작성하기</a></li>
+              {% endif %}
+  
+            </li>
+          </ul>
+          <div style="float:right;">
+              {% if user.is_authenticated %}
+              <a style="font-weight:bold;" class="nav-link" href="{% url 'main:logout' %}">로그아웃</a>
+              {% endif %}
+              </div>
+          <div style="float:right;">
+            {% if user.is_authenticated %}
+            <a id="profile-modal">▼</a>
+            {% endif %}
+          </div>
+        </div>
+    </nav>
+    </div>
+
+    <script>
+      $(function(){
+        
+        $("a").click(function(){
+          $(".modal").fadeIn();
+        });
+        
+        $(".modal_content").click(function(){
+          $(".modal").fadeOut();
+        });
+      });
+    </script>
+
+    <div class="modal">
+      <div class="modal_content">
+        <div class="profile_img">
+          <img src={% if profile.profile.profile_photo %}"{{ profile.profile.profile_photo.url }}"{% else %}"https://i.stack.imgur.com/34AD2.jpg"{% endif %} 
+                  style="border-radius: 50%;" alt="profile_photo" width="150" height="150">
+          </div>
+          <div class="profile_content">
+              <span>사용자 ID : {{ user.username }}</span><br>
+              <span>이름 : {{ user.last_name }}</span><br>
+              <span>닉네임 : {{ profile.profile.nickname }}</span><br>
+              <span>전화번호 : {{ profile.profile.phone_number }}</span><br>
+              <span>이메일 : {{ user.email }}</span><br>        
+              <span>대학교 : {{ profile.profile.university | default_if_none:'' }}</span><br>
+          </div>
+      </div>
+    </div>
