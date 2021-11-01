@@ -5,7 +5,11 @@ from django.urls import  reverse
 from django.contrib.auth import authenticate, get_user, get_user_model, login as dj_login
 from django.views.generic import ListView, DetailView
 from django.shortcuts import get_object_or_404, render, redirect
+<<<<<<< HEAD
 from .models import member, MainPost, chosunPost,mainconsult,seoulconsult,chosunconsult,Profile
+=======
+from .models import member, MainPost, chosunPost,mainconsult,seoulconsult,chosunconsult#,Profile
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
 from django.core.paginator import Paginator
 from django.db.models import Q, Count, Sum
 from django.views.generic import ListView
@@ -20,6 +24,7 @@ from allauth.socialaccount.providers.kakao import views as kakao_view
 from django.contrib.auth.models import User
 from django.views.generic.detail import DetailView
 from django.contrib import messages
+<<<<<<< HEAD
 from django.contrib.auth import update_session_auth_hash, get_user_model
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
@@ -28,6 +33,16 @@ from django.core.exceptions import ObjectDoesNotExist
 
 def nopage(request):
     return render(request,'main/nopage.html', {'success':success})
+=======
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.decorators import login_required
+from mark.models import Mark, MarkItem
+
+def navbar(request, id):
+    profile = get_object_or_404(get_user_model(), id=id)
+    return render(request, 'main/base.html', {'profile':profile})
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
 
 def signup2(request):
     return render(request,'main/signup2.html')
@@ -48,6 +63,7 @@ def signup(request):
         form = UserForm()
     return render(request, 'main/signup.html', {'form': form})
 
+<<<<<<< HEAD
 
 def profile(request, id): # url.py에서 넘겨준 인자를 username으로 받는다.
     global Profile
@@ -60,6 +76,8 @@ def profile(request, id): # url.py에서 넘겨준 인자를 username으로 받�
     return render(request, 'main/navbar.html', {'Profile' : Profile})
 
 
+=======
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
 def search(request):
     posts = MainPost.objects.all().order_by('-id')
     atags = request.POST.getlist('atags','')
@@ -114,6 +132,12 @@ def search(request):
 def success(request):
     return render(request,'main/success.html', {'success':success})
 
+<<<<<<< HEAD
+=======
+def nopage(request):
+    return render(request,'main/nopage.html', {'success':success})
+
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
 def index(request):
     return render(request,'main/index.html')
 
@@ -123,6 +147,7 @@ def login(request):
 
 # def blog(request):
 #     return render(request, 'main/blog.html')
+<<<<<<< HEAD
 def _mark_id(request):
     mark = request.user.id
     # mark = request.session.session_key
@@ -130,6 +155,8 @@ def _mark_id(request):
     #     mark = request.session.create()
     return mark
 
+=======
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
 def blog(request):
     global MarkItem
     mark = request.user.id
@@ -139,6 +166,7 @@ def blog(request):
     postlist  = pagenator.get_page(page)
     mark_items = MarkItem.objects.all()
     mark_items = MarkItem.objects.filter(mark=mark, active=True)
+<<<<<<< HEAD
 
     return render(request, 'main/blog.html', {'postlist':postlist,'mark_items':mark_items})
 
@@ -150,6 +178,11 @@ def blog(request):
 
     return render(request, 'main/blog.html', {'blog':blog})
 
+=======
+    
+    return render(request, 'main/blog.html', {'postlist':postlist,'mark_items':mark_items})
+
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
 def posting(request, pk):
     Mainpost = {'Mainpost': MainPost.objects.all()}
     Mainpost = MainPost.objects.get(pk=pk)
@@ -167,6 +200,7 @@ def remove_post(request, pk):
 # def consult(request):
 #     return render(request,'main/consult.html')
 
+<<<<<<< HEAD
 # def profile(request, id): # url.py에서 넘겨준 인자를 username으로 받는다.
 #     global Profile
 #     # Profile = {'Profile': Profile.objects.all()}
@@ -177,13 +211,29 @@ def remove_post(request, pk):
 # mark_items = MarkItem.objects.filter(mark=mark, active=True)
 
 def change_profile(request, username):
+=======
+# def profile(request, username): # url.py에서 넘겨준 인자를 username으로 받는다.
+#     profile = get_object_or_404(get_user_model(), username=username)
+#     return render(request, 'main/profile.html', {'profile':profile})
+
+# def profile(request, id): # url.py에서 넘겨준 인자를 username으로 받는다.
+#    profile = get_object_or_404(get_user_model(), id=id)
+#    return render(request, 'main/base.html', {'profile':profile})
+
+
+def change_profile(request, id):
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
     if request.method == 'POST':
         user_change_form = CustomUserChangeForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if user_change_form.is_valid() and profile_form.is_valid():
             user = user_change_form.save()
             profile_form.save()
+<<<<<<< HEAD
             return redirect('main:profile',user.username)
+=======
+            return redirect('main:profile',user.id)
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
         return redirect('main:change_profile')
     else:
         user_change_form = CustomUserChangeForm(instance=request.user)
@@ -246,7 +296,11 @@ def Consult(request,point_id):
     form = consult_form(request.POST)
     # post = MainPost.objects.all(point_id)
     if request.method == "POST" and form.is_valid() :
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
         if point_id == "2":
             form = seoulconsult()
             form.name = request.POST['name']
@@ -283,7 +337,10 @@ def Consult(request,point_id):
             #form.university = form.cleaned_data.get('university')
             form.contents = request.POST['contents']
             form.save()
+<<<<<<< HEAD
             return redirect('/success')
+=======
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
         if point_id == "2":
             form = seoulconsult()
             form.username = request.POST['username']
@@ -312,7 +369,13 @@ def Consult(request,point_id):
 #내가 쓴 글만 보이게 하는 상담신청 리스트페이지
 def consult2(request):
     postlist2= mainconsult.objects.all().order_by('-id')
+<<<<<<< HEAD
     blog_list = postlist2.filter(username=request.user.username)
+=======
+    blog_list = postlist2.filter(username=request.user.username) 
+    #postlist2= mainconsult.objects.all().order_by('-id')
+    #blog_list = postlist2.filter(name=request.user.username) 
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
     return render(request, 'main/consult_board.html',{'blog_list':blog_list})
 
 def consult2_popup(request, pk):
@@ -323,7 +386,11 @@ def consult2_popup(request, pk):
 '''
 def kakao_login(request):
     app_rest_api_key = os.environ.get("f7392204050136e895a59bbdcb9090db")
+<<<<<<< HEAD
     redirect_uri = main_domain + "accounts/kakao/login/callback"
+=======
+    redirect_uri = main_domain + "accounts/kakao/login/callback" 
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
     return redirect(
         f"https://kauth.kakao.com/oauth/authorize?client_id={'f7392204050136e895a59bbdcb9090db'}&redirect_uri={'http://127.0.0.1:8000/'}&response_type=code"
     )
@@ -389,4 +456,8 @@ class KakaoSignInCallbackView(View):
             ).save()
             token = jwt.encode({"email" : email}, SECRET['SECRET_KEY'], algorithm = "HS256")
             token = token.decode("utf-8")
+<<<<<<< HEAD
             return JsonResponse({"token" : token}, status = 200)
+=======
+            return JsonResponse({"token" : token}, status = 200)
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0

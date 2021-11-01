@@ -96,7 +96,11 @@
 
         </div>
     </form>
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
     </div>
 
 <script>
@@ -156,8 +160,12 @@
     <a>내가 찜한 공고</a>
 
     <div id="favorite" style="background-color: #f7f7f7; text-decoration: none;">
+<<<<<<< HEAD
 
       {% for mark_items in mark_items %}
+=======
+        {% for mark_items in mark_items %}
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
     <tr class="text-left">
         <th width = "-100">
           <a href="/blog/{{MarkItem.MainPost_id }}">
@@ -203,6 +211,7 @@
                       <br>
                       <span style="line-height: 3.6rem; text-overflow: ellipsis; overflow:hidden;">{{ Mainpost.created_date | date:"Y-m-d h:i" }}</span>
                       </a>
+<<<<<<< HEAD
 
                     </th>
                     <th>
@@ -210,6 +219,15 @@
                         <br>
                         <p style="padding-top:4rem;"><a href="{% url 'mark:delete' Mainpost.id %}">삭제</a></p>
                         </th>
+=======
+                      
+                    </th>
+                    <th style="vertical-align: top; text-align: right;" width="80">
+                      <a class="star-icon" href="{% url 'mark:add_mark' Mainpost.id %}">☆</a>
+                      <br>
+                      <p style="padding-top:4rem;"><a href="{% url 'mark:delete' Mainpost.id %}">삭제</a></p>
+                      </th>
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
                 </tr>
               {% endfor %}
               </tbody>
@@ -254,4 +272,8 @@
     </div>
   </div>
 
+<<<<<<< HEAD
 {% endblock %}
+=======
+{% endblock %}
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0

@@ -24,6 +24,12 @@ class consult_form(forms.Form):
     university = forms.CharField(label='대학교')
     #contents = forms.CharField(label='상담내용', max_length=500, widget=forms.Textarea(attrs={'row':5,'placeholder':'500자 이내로 작성해주세요.'}))
     contents = forms.CharField(label='상담내용', max_length=300)
+<<<<<<< HEAD
+=======
+    # class Meta:
+    #     model = mainconsult
+    #     fields = ("name","phone_number","university", "postname","contents")
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
 
 
 class CustomUserChangeForm(UserChangeForm):
@@ -44,3 +50,7 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['nickname', 'phone_number', 'profile_photo', 'university']
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0

@@ -1,0 +1,13 @@
+<!--
+<div class="profile_img">
+    <img src={% if person.profile.profile_photo %}"{{ person.profile.profile_photo.url }}"{% else %}"https://i.stack.imgur.com/34AD2.jpg"{% endif %} 
+            style="border-radius: 50%;" alt="profile_photo">
+    </div>
+<div class="profile_content">
+        <a>사용자 ID : {{ user.username }}</a><br>
+        <a>닉네임 : {{ person.profile.nickname }}</a><br>
+        <a>전화번호 : {{ person.profile.phone_number }}</a><br>
+        <a>이메일 : {{ user.email }}</a><br>        
+        <a>대학교 : {{ person.profile.university | default_if_none:'' }}</a><br>
+    </div>
+    -->

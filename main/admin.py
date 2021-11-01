@@ -1,6 +1,11 @@
 from django.contrib import admin
 # Register your models here.
+<<<<<<< HEAD
 from .models import  member,MainPost,chosunPost, seoulPost, mainconsult, chosunconsult, seoulconsult, Profile, Status
+=======
+from .models import  member,MainPost,chosunPost, seoulPost, mainconsult, chosunconsult, seoulconsult, Status
+from profile2.models import Profile2
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 from django.utils.safestring import mark_safe
@@ -14,7 +19,10 @@ class PostAdmin(admin.ModelAdmin):
     user_filter = ('area')
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
 class memberAdmin(admin.ModelAdmin):
     list_display=('id' ,'title')
 
@@ -43,7 +51,11 @@ class consultAdmin(admin.ModelAdmin):
 
 
 class ProfileInline(admin.StackedInline): # 로또 프로젝트에서 썼던 방식으로 유저 밑에 프로필 을 붙여서 보여주려고 이를 상속받음
+<<<<<<< HEAD
     model = Profile
+=======
+    model = Profile2
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
     con_delete = False                    # 프로필을 아예 없앨 수 없게 하는 속성(한번 만들면 지우는건 이상하니까)
 
 class CustomUserAdmin(UserAdmin):
@@ -57,4 +69,8 @@ admin.site.register(chosunconsult, consultAdmin)
 admin.site.register(seoulconsult, consultAdmin)
 admin.site.register(MainPost, PostAdmin)
 admin.site.unregister(User)
+<<<<<<< HEAD
 admin.site.register(User, CustomUserAdmin)
+=======
+admin.site.register(User, CustomUserAdmin)
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0

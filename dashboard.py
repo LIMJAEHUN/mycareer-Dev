@@ -56,6 +56,7 @@ class CustomIndexDashboard(Dashboard):
         ))
 
         self.children.append(modules.Feed(
+<<<<<<< HEAD
             _('메이플스토리 공지사항'),
             feed_url='https://createfeed.fivefilters.org/extract.php?url=https%3A%2F%2Fmaplestory.nexon.com%2FNews%2FNotice%2FAll&item=.news_board+li&item_desc=img+%40alt&item_date=dd&item_date_format=Y.m.d&max=5&order=document&guid=0',
             limit=20,
@@ -66,6 +67,10 @@ class CustomIndexDashboard(Dashboard):
         self.children.append(modules.Feed(
             _('메이플스토리 업데이트 뉴스'),
             feed_url='https://createfeed.fivefilters.org/extract.php?url=https%3A%2F%2Fmaplestory.nexon.com%2FNews%2FUpdate&item=.update_board+li&item_date=dd&item_date_format=Y.m.d&max=5&order=document&guid=0',
+=======
+            _('이데일리 전체뉴스'),
+            feed_url='http://rss.edaily.co.kr/edaily_news.xml',
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
             limit=20,
             column=0,
             order=0

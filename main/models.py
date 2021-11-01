@@ -32,7 +32,11 @@ class chosunPost(models.Model):
     author = models.CharField(max_length=16, blank=True, null=False, verbose_name='작성자')
     job = models.CharField(max_length=10, blank=True, null=True,verbose_name='직무')
     etc = models.CharField(max_length=30, blank=True, null=True,verbose_name='우대사항' )
+<<<<<<< HEAD
     ck = RichTextUploadingField(blank=True, null=True)
+=======
+    ck = RichTextUploadingField(blank=True, null=True,verbose_name='본문내용')
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
     point_id = models.IntegerField(verbose_name='회사번호',default=1)
 
 
@@ -65,7 +69,11 @@ class seoulPost(models.Model):
     author = models.CharField(max_length=16, blank=True, null=False, verbose_name='작성자')
     job = models.CharField(max_length=10, blank=True, null=True,verbose_name='직무')
     etc = models.CharField(max_length=30, blank=True, null=True,verbose_name='우대사항' )
+<<<<<<< HEAD
     ck = RichTextUploadingField(blank=True, null=True)
+=======
+    ck = RichTextUploadingField(blank=True, null=True,verbose_name='본문내용')
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
     point_id = models.IntegerField(verbose_name='회사번호',default=2)
 
 
@@ -76,9 +84,15 @@ class seoulPost(models.Model):
 
 class chosunconsult(models.Model):
     id = models.AutoField(primary_key=True)
+<<<<<<< HEAD
     name = models.CharField(max_length=30, verbose_name='이름')
     username = models.CharField(max_length=100, verbose_name='회원아이디')
     phone_number = models.IntegerField()
+=======
+    username = models.CharField(max_length=100, verbose_name='회원아이디')
+    name = models.CharField(max_length=30, verbose_name='이름')
+    phone_number = models.CharField(max_length=15, verbose_name='전화번호')
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
     university = models.CharField(db_column='University', max_length=32, blank=True, null=True)
     contents = models.CharField(max_length=300,verbose_name='세부내용',null=True,)
     created_at = models.DateTimeField('작성일', auto_now_add=True)
@@ -91,9 +105,15 @@ class chosunconsult(models.Model):
 
 class seoulconsult(models.Model):
     id = models.AutoField(primary_key=True)
+<<<<<<< HEAD
     name = models.CharField(max_length=30, verbose_name='이름')
     username = models.CharField(max_length=100, verbose_name='회원아이디')
     phone_number = models.IntegerField()
+=======
+    username = models.CharField(max_length=100, verbose_name='회원아이디')
+    name = models.CharField(max_length=30, verbose_name='이름')
+    phone_number = models.CharField(max_length=15, verbose_name='전화번호')
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
     university = models.CharField(db_column='University', max_length=32, blank=True, null=True)
     contents = models.CharField(max_length=300,verbose_name='세부내용',null=True,)
     created_at = models.DateTimeField('작성일', auto_now_add=True)
@@ -105,9 +125,16 @@ class seoulconsult(models.Model):
 
 class mainconsult(models.Model):
     id = models.AutoField(primary_key=True)
+<<<<<<< HEAD
     name = models.CharField(max_length=30, verbose_name='이름')
     username = models.CharField(max_length=100, verbose_name='회원아이디')
     phone_number = models.IntegerField()
+=======
+    username = models.CharField(max_length=100, verbose_name='회원아이디')
+    name = models.CharField(max_length=30, verbose_name='이름')
+    #name = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    phone_number = models.CharField(max_length=15, verbose_name='전화번호')
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
     university = models.CharField(db_column='University', max_length=32, blank=True, null=True)
     contents = models.CharField(max_length=300,verbose_name='세부내용',null=True,)
     created_at = models.DateTimeField('작성일', auto_now_add=True)
@@ -121,7 +148,11 @@ class Status(models.Model):
     STATUS_CHOICES = (
         ('상담완료', 'success'),
         ('상담실패', 'fail'),
+<<<<<<< HEAD
         ('상담대0', 'wait')
+=======
+        ('상담대기', 'wait')
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
     )
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
 
@@ -131,7 +162,11 @@ class Profile(models.Model):
     phone_number = models.CharField(max_length=12,verbose_name='전화번호')
     university = models.CharField(max_length=32,verbose_name='대학교',null=True)
     profile_photo = models.ImageField(blank=True,verbose_name='프로필사진')                 # 값을 채워넣지 않아도 되는 속성.
+<<<<<<< HEAD
     id = models.AutoField(primary_key=True)
+=======
+    id = models.AutoField(primary_key=True,null=False)
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
 
     class Meta:
         managed = False
@@ -139,3 +174,7 @@ class Profile(models.Model):
     # class Meta:
     #     model = Profile
     #     fields = ['id', 'nickname', 'phone_number','university', 'profile_photo',]
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0

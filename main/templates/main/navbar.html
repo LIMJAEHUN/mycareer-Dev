@@ -53,7 +53,11 @@
             <li><a href="/consult2">상담신청 목록조회</a></li>
             <li><a class="nav-link" href="/add/mark">즐겨찾기</a></li>
         </div>
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
         <div class="nav-profile-logout">
             <a href="{% url 'main:logout' %}">로그아웃</a>
         </div>
@@ -76,7 +80,11 @@
 <script>
 
     $(document).ready(function(){
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
         /*
         var profileBtn = 0;
         $('.profile_button>i').on('click', function(){
@@ -103,7 +111,11 @@
             };
             console.log(profileBtn);
         });
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
         // 모바일 버전일때
         $('.mobile_menu>i').on('click', function(){
             $('.nav-sidemenu-background').show();
@@ -131,12 +143,20 @@
     {% if user.is_authenticated %}
     <ul class="nav-sidemenu-list">
         <div class="nav-sidemenu-profileImg">
+<<<<<<< HEAD
             <img src={% if profile.profile.profile_photo %}"{{ profile.profile.profile_photo.url }}"{% else %}"https://i.stack.imgur.com/34AD2.jpg"{% endif %}
+=======
+            <img src={% if profile.profile.profile_photo %}"{{ profile.profile.profile_photo.url }}"{% else %}"https://i.stack.imgur.com/34AD2.jpg"{% endif %} 
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
             style="border-radius: 50%;" alt="profile_photo" width="80" height="80">
         </div>
         <div class="nav-sidemenu-profileList">
             <span>{{ user.username }}</span><br>
+<<<<<<< HEAD
             <span>{{ user.email }}</span><br>
+=======
+            <span>{{ user.email }}</span><br>        
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
             <span>대학교 : {{ profile.profile.university | default_if_none:'' }}</span><br>
         </div>
 
@@ -164,3 +184,7 @@
     </ul>
 </nav>
 </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6019f41c016fb3ae71ff4ca90e86f0a78662aec0
