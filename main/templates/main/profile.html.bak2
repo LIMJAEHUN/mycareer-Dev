@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로필</title>
+</head>
+<body>
+    <div class="profile">
+        <div class="profile_img">
+        <img src={% if profile.profile.profile_photo %}"{{ profile.profile.profile_photo.url }}"{% else %}"https://i.stack.imgur.com/34AD2.jpg"{% endif %} 
+                style="border-radius: 10%;" alt="profile_photo">
+        </div>
+        <div class="profile_content">
+            <a>사용자 ID : {{ user.username }}</a><br>
+            <a>닉네임 : {{ profile.profile.nickname }}</a><br>
+            <a>전화번호 : {{ profile.profile.phone_number }}</a><br>
+            <a>이메일 : {{ user.email }}</a><br>        
+            <a>대학교 : {{ profile.profile.university | default_if_none:'' }}</a><br>
+        </div>
+    {% if profile == user %}
+    <button class="profile_btn" type="button" onclick="location.href='<str:username>/change_profile'">회원정보 수정하기</button>
+    <button class="profile_btn" type="button" onclick="location.href='<str:username>/change_password'">비밀번호 수정하기</button>
+    
+    {% endif %}
+    </div>
+</body>
+
+</html>

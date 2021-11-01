@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폼테스트</title>
+</head>
+
+<style>
+    @media (min-width: 320px) and (max-width: 480px) {
+        body{
+            overflow:hidden;
+            margin: 0;
+            background-color:#f7f7f7;
+        }
+        input[type="checkbox"] {
+            display: none;
+        }
+        label {
+            display: inline-block;
+            border-radius: 20px;
+            text-align: center;
+            text-decoration: none;
+            border: solid 1px #ccc;
+            transition: 0.25s;
+            padding: 6px 18px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        input[type="checkbox"]:checked + label {
+        background: #0070cc;
+        color: #fff;
+        }
+
+    }
+</style>
+<body>
+    <div class="filter">
+        <form class="form">
+            <a>직무</a>
+            <div class="job" style="overflow-x: scroll; white-space: nowrap;">
+        </div>
+        <a>지역</a>
+        <div class="region" style="overflow-x: scroll; white-space: nowrap;">
+            
+            <label for="id_tags_16">제주특별자치도</label>
+            <input type="checkbox" name="area" value="제주특별자치도" id="id_tags_16" onclick="CountChecked(this)">
+            <label for="id_tags_16">제주특별자치도</label>
+            <input type="checkbox" name="area" value="제주특별자치도" id="id_tags_16" onclick="CountChecked(this)">
+            <label for="id_tags_16">제주특별자치도</label>
+            <input type="checkbox" name="area" value="제주특별자치도" id="id_tags_16" onclick="CountChecked(this)">
+            <label for="id_tags_16">제주특별자치도</label>
+            <input type="checkbox" name="area" value="제주특별자치도" id="id_tags_16" onclick="CountChecked(this)">
+            <label for="id_tags_16">제주특별자치도</label>
+            <input type="checkbox" name="area" value="제주특별자치도" id="id_tags_16" onclick="CountChecked(this)">
+            <label for="id_tags_16">제주특별자치도</label>
+
+        </div>
+        <a>우대사항</a>
+        <div class="dneo" style="overflow-x: scroll; white-space: nowrap;">
+
+
+        </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=600, initial-scale=1.0">
+    <title>상담내역</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic:wght@400;700&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  </head>
+
+  <style>
+        body{
+        font-family: 'Noto Sans KR', sans-serif;
+        margin: 30px 0 0 0;
+        background-color:#f7f7f7;
+    }
+
+    form{
+        max-width: fit-content;
+    }
+
+    .title-bar{
+        width: 100%;
+        height: fit-content;
+        font-family: 'Do Hyeon', sans-serif;
+        color: rgb(41, 41, 41);
+        text-align: center;
+        font-size: 65px;
+        margin: 30px 0 15px 170px;
+        text-decoration: none;
+        background: linear-gradient(to top, rgba(144, 166, 238, 0.452) 40%, transparent 40%);
+    }
+
+    .content{
+        width:90%;
+        border: 1px solid #ddd;
+        margin:10px 10px 0 20px;
+        padding:10px 10px 0 10px;
+    }
+
+    .form-list{
+        margin-left: 30px;
+    }
+
+    .form-content{
+        padding: 0;
+        margin: 0;
+    }
+
+    .form-list input{
+        position: relative;
+        margin: 5px 0 15px 5px;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        max-width: 450px;
+        width: 450px;
+        height: 30px;
+        text-indent: 3px;
+    }
+
+    .form-list a {
+        margin: 5px 0 5px 5px;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-weight: bold;
+        font-size: 20px;
+        color:black;
+        text-decoration:none
+    }
+
+    .form-content textarea {
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+        width: 450px;
+        height: 200px;
+        text-indent: 3px;
+        margin-left: 5px;
+        resize: none;
+    }
+
+    .consult-form-checkbox{
+        color:yellow;
+        margin-left: 10px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .consult-submit-btn{
+        padding: 0;
+        font-family: 'Noto Sans KR', sans-serif;
+        margin: 10px 10px 10px 35px;
+        width: 450px;
+        height: 60px;
+        border: none;
+        border-radius: 10px;
+        background-color: #1b5ac2;
+        color: #fff;
+        text-align: center;
+        text-indent: 0px;
+        box-shadow: 0 4px 16px rgba(0,79,255,0.3);
+        transition:0.3s;
+    }
+    button:hover{
+        background: rgba(0,79,255,0.9);
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0,79,255,0.6);
+        color:#fff;
+    }
+    .consult-submit-btn a{
+        font-family: 'Noto Sans KR', sans-serif;
+        font-weight: bold;
+        margin: 5px;
+        font-size: 40px;
+        color: #fff;
+        text-decoration:none
+    }
+
+    form textarea {
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+        text-indent: 3px;
+        resize: none;
+    }
+
+    form p {
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+  </style>
+
+  <body>
+    <span class="title-bar">상담신청서</span>
+    <div class = "content">
+      <form action="" method="POST" id="form" class="consult_form" name="consultForm" onsubmit="return formCheck()">
+      {% csrf_token %}
+      <div class="form-list">
+        <a>이름</a><br>
+        <input type="text" class="form-list-input" name="name" id="name" placeholder="" value="{{details.name}}" disabled><br>
+        <a>작성날짜</a><br>
+        <input type="text" class="form-list-input" name="date" id="date" placeholder="-와 띄어쓰기를 제외하고 입력하세요." value="{{details.created_at}}"  disabled><br>
+        <a>휴대폰 번호</a><br>
+        <input type="text" class="form-list-input" name="phone_number" id="phone_number" value="{{details.phone_number}}"  disabled><br>
+        <a>대학교</a><br>
+        <input type="text" class="form-list-input" name="university" id="university" value="{{details.university}}"  disabled><br>
+        <a>상담 내용</a><br>
+        <textarea id="contents" name="contents" cols="40" rows="7" disabled>{{details.contents}}</textarea>
+        </div>
+  </body>
+</html>

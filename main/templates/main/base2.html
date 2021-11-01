@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>마이 커리어</title>
+
+  <link rel = "stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+  <link rel = "stylesheet" href="{% static 'css/checkbox.css'%}">
+  <link rel = "stylesheet" href="{% static 'css/style.css'%}">
+
+  <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+  <!-- 구글웹 폰트 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic:wght@400;700&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+
+  <script src="https://kit.fontawesome.com/51db22a717.js" crossorigin="anonymous"></script>
+  <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+
+<script>
+// 익스플로러(Internet Explorer) 체크
+var agent = navigator.userAgent.toLowerCase();
+if ( (navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1) ) {
+  alert("인터넷 익스플로러 브라우저로 접속하셨습니다. 해당 브라우저에서는 정상작동하지 않습니다.");
+}
+</script>
+
+<style>
+  .nav-contain{
+    width : 1130px;
+    margin : 0 auto;
+  }
+</style>
+
+<body>
+  <div id = "wrapper">
+  <!-- NAV 부분 설정 -->
+
+  NAV 부분  -->
+  <div id ="nav">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+      <img src="/media/logo.png" alt="logo" style="width:45px; height:45px;"> <a class="navbar-brand" href="/">마이커리어</a>
+      {% if user.is_authenticated %}
+      <a class="nav-link" href="{%url "main:profile" user.id %}">{{ user.username }}님 안녕하세요![프로필 정보]</a>
+      {% else %}
+      <a class="nav-link" href="{% url 'main:login' %}">로그인</a>
+
+      {% endif %}
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item ">
+              <li><a class="nav-link" href="/blog/">취업게시판</a></li>
+              <li><a class="nav-link" href="/consult2">상담신청 목록조회</a></li>
+              <li><a class="nav-link" href="/add/mark">즐겨찾기</a></li>
+              {% if user.is_authenticated %}
+              <li><a class="nav-link" href="/admin/">글 작성하기</a></li>
+              {% endif %}
+
+            </li>
+          </ul>
+          <div style="float:right;">
+              {% if user.is_authenticated %}
+              <a style="font-weight:bold;" class="nav-link" href="{% url 'main:logout' %}">로그아웃</a>
+              {% endif %}
+              </div>
+        </div>
+    </nav>
+    </div>
+
+
+  <section id = "section">
+
+    {% block content %}
+    {% endblock %}
+  </section>
+  </div>
+
+  <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+
+</body>
+</html>

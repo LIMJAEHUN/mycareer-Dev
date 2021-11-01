@@ -1,0 +1,86 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+<link rel = "stylesheet" href="{% static 'css/style.css'%}">
+
+{% block content %}
+<body>
+    <div class="page-container">
+        <div class="login-form-container shadow">
+            <div class="login-form-right-side">
+                <div class="top-logo-wrap">
+                    
+                </div>
+                <div class="login-title">
+                <a>마이커리어에 오신것을 환영합니다</a>
+            </div class="login-sub-title">
+                <p>취업게시판을 이용해서 취업하고싶으면 로그인을 먼저해라</p>
+            </div>
+            <div class="login-form-left-side">
+                <div class="login-top-wrap">
+                    <span>마이커리어에 가입하셔서 새로운 정보를 받아가</span>
+                    <div class = "new-account-btn">
+                        <a href="{% url 'main:signup' %}">회원가입</a>
+                    </div>
+                    <!-- <button type="button" onclick="location.href=% url 'main:signup' % class="create-account-btn shadow-light">회원가입</button> -->
+                </div>
+                <div class="login-input-container">
+                    <div class="login-input-wrap input-id">
+                        <form method="post"class="post-form" action="{% url 'main:login' %}""></form>
+                        <i class="far fa-envelope"></i>
+                            {% csrf_token %}
+                            {% include "main/form_errors.html" %}
+                            <input placeholder="아이디를 입력하세요" type="text" name="username" id="username"
+                                    value="{{ form.username.value|default_if_none:'' }}">
+                        
+                        <!-- <input placeholder="Email" type="text"> -->
+                    </div>
+
+                    <div class="login-input-wrap input-password">
+                        <!-- <i class="fas fa-key"></i> -->
+                        <input placeholder="비밀번호를 입력하세요" type="password" class="form-control" name="password" id="password"
+                   value="{{ form.password.value|default_if_none:'' }}">
+                        
+                        
+
+                        <!-- <input placeholder="Password"  type="password"> -->
+                    </div>
+                </div>
+                <div class="login-btn-wrap">
+                    <button type="submit" class="btn btn-primary">로그인</button>
+                    </div>
+                    <a href="#" >Forgot password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+
+<!-- 
+<div class="container my-3">
+  <div class="row">
+      <div class="col-4">
+          <h4>로그인</h4>
+      </div>
+      <div class="col-8 text-right">
+          <span>또는 <a href="{% url 'main:signup' %}">계정을 만드세요.</a></span>
+      </div>
+  </div>
+    <form method="post" class="post-form" action="{% url 'main:login' %}">
+        {% csrf_token %}
+        {% include "main/form_errors.html" %}
+        <div class="form-group">
+            <label for="username">사용자ID</label>
+            <input type="text" class="form-control" name="username" id="username"
+                   value="{{ form.username.value|default_if_none:'' }}">
+        </div>
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input type="password" class="form-control" name="password" id="password"
+                   value="{{ form.password.value|default_if_none:'' }}">
+        </div>
+        <button type="submit" class="btn btn-primary">로그인</button>
+    </form>
+</div> -->
+{% endblock %}

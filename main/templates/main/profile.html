@@ -1,0 +1,179 @@
+{%extends "main/base.html"%}
+{% load static %}
+{% block content %}
+<style>
+    html {
+        height: 100%;
+    }
+    body {
+        display: block;
+        margin: 0;
+        height: 100%;
+    }
+    a {
+        text-decoration:none;
+        text-decoration-line: none;
+    }
+
+    a:link, a:visited, a:hover, a:active {
+        color:#202020;;
+    }
+    #nav{
+        width:100%;
+        min-width: 1280px;
+        top:0;
+        margin:0;
+        padding:0;
+        position:relative;
+        z-index: 1;
+    }
+
+    #wrapper{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        position:absolute;
+    }
+    #section{
+        top: 0;
+        margin-top: 0;
+        position:relative;
+        display: block;
+    }
+    #footer{
+        position: absolute;
+        bottom: 1%;
+        left: 0;
+        right: 0;
+    }
+
+    /*
+    html,body{
+        margin:0;
+        padding:0;
+        height:100%;
+    }
+    #wrapper{
+        margin: 0;
+        padding: 0;
+        min-height: 95%;
+        min-width: 99%;
+        position: relative;
+        background-color: teal;
+    }
+    #section{
+        position: relative;
+        background-color: olivedrab;
+        width: 100%;
+    }
+
+    */
+    .login_badge{
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    .profile-wrap{
+        margin: 0 auto;
+        border: 2px solid #ddd;
+        position: absolute;
+        width: 1200px;
+    }
+
+    .profile-sidebar{
+        width: 20%;
+        border: none;
+        position: relative;
+        float: left;
+        text-align: center;
+        
+    }
+
+    .profile-sidebar a {
+        font-size: 20px;
+        margin: 0 auto;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-weight: bold;
+        text-decoration: none;
+        text-align: center;
+        border: 1px solid yellow;
+        display: flex;
+    }
+
+    .profile{
+        border: none;
+        border-left: 2px solid #ddd;
+        margin:0;
+        width: 40%;
+        height: 500px;
+        border-radius: 5px;
+        padding: 30px;
+        position: relative;
+        float: left;
+    }
+    .profile_img{
+        margin-top: 50px;
+        float: left;
+        width: 150px;
+        height: 150px;
+    }
+    /*.profile_img img{
+        margin: 50px 90px 0 50px;
+        width: 150px;
+        height: 150px;
+        float: left;
+    }*/
+    .profile_content{
+        margin-top: 50px;
+        width: fit-content;
+        /*border: 1px solid red;*/
+        float: left;
+    }
+    .profile_content span {
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 15px;
+        font-weight: 300;
+        margin: 0 0 0 30px;
+    }
+
+    .profile_btn{
+        float: right;
+    }
+
+    .container-profile{
+        width : 1130px;
+        margin : 0 auto;
+    }
+</style>
+
+<div class="container-profile">
+<h2 style="font-family: 'Do Hyeon', sans-serif; margin: 5px 0 0 5px">프로필 정보</h2>
+<div class="profile-wrap">
+    <div class="profile-sidebar">
+    <button href='#'>내 프로필 정보</button> <br>
+    {% if profile == user %}
+    <button onclick="location.href='/<str:username>/change_profile'">회원정보 수정하기</button> <br>
+    <button onclick="location.href='/<str:username>/change_password'">비밀번호 수정하기</button> <br>
+    {% endif %}
+    <button onclick="location.href='/add/mark'">내가 찜한 공고</button> <br>
+    <button onclick="location.href='/consult2'">상담 내역 조회</button> <br>
+    
+    </div>
+    <div class="profile">
+        <div class="profile_img">
+        <img src={% if profile.profile.profile_photo %}"{{ profile.profile.profile_photo.url }}"{% else %}"https://i.stack.imgur.com/34AD2.jpg"{% endif %} 
+                style="border-radius: 50%;" alt="profile_photo" width="150" height="150">
+        </div>
+        <div class="profile_content">
+            <span>사용자 ID : {{ user.username }}</span><br>
+            <span>이름 : {{ user.last_name }}</span><br>
+            <span>닉네임 : {{ profile.profile.nickname }}</span><br>
+            <span>전화번호 : {{ profile.profile.phone_number }}</span><br>
+            <span>이메일 : {{ user.email }}</span><br>        
+            <span>대학교 : {{ profile.profile.university | default_if_none:'' }}</span><br>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

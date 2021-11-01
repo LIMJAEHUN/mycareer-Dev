@@ -1,0 +1,242 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+    <!-- 구글웹 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic:wght@400;700&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  body{
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    background-color: #f7f7f7
+  }
+  a {
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  .detail_form {
+    font-family: 'Noto Sans KR', sans-serif;
+    border-bottom: 2px solid #ddd;
+    height: 150px;
+    padding : 0.5rem;
+  }
+  .detail_form_logo{
+    margin: 5rem 30rem 0 5rem;
+    float: left;
+  }
+  .detail_form_coment{
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-top: 5rem;
+  }
+  .detail_form_coment a {
+    margin-bottom: 105rem;
+    font-size: 1.6rem;
+  }
+  .detail_form_ckeditor{
+    width:auto;
+    margin: 0 auto;
+    overflow: hidden;
+    text-align:center;
+  }
+  .detail_form_addform{
+    position: relative;
+    margin: 0 auto;
+    border-top: 2px solid #ddd;
+    border-bottom: 2px solid #ddd;
+    padding : 5px;
+    height: 150px;
+  }
+
+  .detail_form_ckeditor > img{
+    width: 100%;
+    height: 100%;
+    object-fit:contain;
+  }
+
+  .Consult-btn {
+    font-family: 'Noto Sans KR', sans-serif;
+    width:150px;
+    height: 40px;
+    color:#fff;
+    background: #1b5ac2;
+    font-size: 1.9rem;
+    font-weight: 500;
+    border:none;
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(0,79,255,0.3);
+    transition:0.3s;
+    float: right;
+    transform: translate(-50%,-50%);
+  }
+
+  .Back-btn {
+    margin: 20px 0 0 28rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    width:250px;
+    height: 50px;
+    color:#fff;
+    background: #1b5ac2;
+    font-size: 19px;
+    font-weight: 500;
+    border:none;
+    border-radius: 15px;
+    box-shadow: 0 4px 16px rgba(0,79,255,0.3);
+    transition:0.3s;
+  }
+
+  .title-bar{
+    display: inline;
+    width: 100%;
+    height: fit-content;
+    font-family: 'Do Hyeon', sans-serif;
+    color: rgb(41, 41, 41);
+    text-align: center;
+    font-size: 65px;
+    margin: 30px 0 15px 170px;
+    text-decoration: none;
+    background: linear-gradient(to top, rgba(144, 166, 238, 0.452) 40%, transparent 40%);
+}
+
+.content{
+    width:90%;
+    border: 1px solid #ddd;
+    margin:10px 10px 0 20px;
+    padding:10px 10px 0 10px;
+}
+
+.form-list{
+    margin-left: 30px;
+}
+
+.form-content{
+    padding: 0;
+    margin: 0;
+}
+
+.form-list input{
+    position: relative;
+    margin: 5px 0 15px 5px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    max-width: 450px;
+    width: 450px;
+    height: 30px;
+    text-indent: 3px;
+}
+
+.form-list a {
+    margin: 5px 0 5px 5px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.form-content textarea {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    width: 450px;
+    height: 200px;
+    text-indent: 3px;
+    margin-left: 5px;
+    resize: none;
+}
+
+.consult-form-checkbox{
+    color:yellow;
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+.consult-submit-btn{
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 10px 10px 10px 35px;
+    width: 450px;
+    height: 60px;
+    border: none;
+    border-radius: 10px;
+    background-color: #1b5ac2;
+    color: #fff;
+    text-align: center;
+    text-indent: 0px;
+    box-shadow: 0 4px 16px rgba(0,79,255,0.3);
+    transition:0.3s;
+}
+button:hover{
+    background: rgba(0,79,255,0.9);
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,79,255,0.6);
+}
+.consult-submit-btn a{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+    margin: 5px;
+    font-size: 40px;
+}
+
+form textarea {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    text-indent: 3px;
+    width:455px;
+    resize: none;
+}
+
+form p {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+
+ins {
+  margin: 20px auto 10px 230px;
+}
+</style>
+
+
+<div class = "detail_form">
+  <div class = "detail_form_logo">
+    <img src = "{{Mainpost.rogophoto.url}}" width="100px" height="100px" style="object-fit: contain;">
+  </div>
+  <div class = "detail_form_coment">
+    <a><b>회사명 :</b> {{Mainpost.postname}}</a><br>
+    <a><b>작성자 :</b> {{Mainpost.author}}</a><br>
+    <a><b>근무지 :</b> {{Mainpost.area}}</a><br>
+    <a><b>우대사항 :</b> {{Mainpost.etc}}</a>
+  </div>
+  <!--
+  <button style="float:right;"> <a style="text-decoration: none;"href="#"
+  onclick="window.open('Consult','_blank', 'width=530, height=1000, scrollbars=no, resizable=no, toolbars=no, menubar=no');
+  return false;">상담신청</a>
+  </button>-->
+  <!--<button class="Consult-btn" type="button" onclick="location.href='Consult'">상담신청</button>-->
+  <button class="Consult-btn" type="button" onclick="window.open('/Consult/{{Mainpost.point_id}}','window_name','width=600,height=780,location=no,status=no,resizable=no,scrollbars=no');">상담신청</button>
+  <!-- <button class="Consult-btn" id="btn-modal" type="button">상담신청 모달창</button> -->
+</div>
+
+
+<div class="detail_form_ckeditor">
+  <p>{{Mainpost.ck|safe}}</p>
+</div>
+
+<div class="detail_form_addform">
+  <ins class="kakao_ad_area" style="display:none;" 
+ data-ad-unit    = "DAN-yT4ctFsLBflrTyhu" 
+ data-ad-width   = "728" 
+ data-ad-height  = "90"></ins>
+</div>
+<button class="Back-btn" type="button" onclick="location.href='/blog'">채용정보로 돌아가기</button>
+
+<!--
+<a href="/blog/">목록</a>
+<a href="/blog/{{post.pk}}/remove">삭제</a>
+-->
+{% endblock %}
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>

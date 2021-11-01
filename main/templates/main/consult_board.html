@@ -1,0 +1,128 @@
+{%extends "main/base.html"%}
+{% load static %}
+{% block content %}
+
+<style>
+    body{
+        height:100%;
+        font-size:1.6rem;
+    }
+    table{
+    table-layout: fixed;
+    }
+
+    .container-board{
+        width:1200px;
+        margin:0 auto;
+        
+    }
+    .consult-view-btn{
+        float: left;
+        border: 1.5px solid #68b942;
+        background: #f7f7f7;
+        outline: none;
+        color: #5db434;
+        border-radius: 5px;
+    }
+    .consult-view-btn a{
+        font-size: 1.5rem;
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+    {% if user.is_authenticated %}
+        <!-- 공지사항 -->
+        <div class="alert alert-danger" role="alert">
+            <a href="#" class="alert-link">내가 작성한 상담신청 목록 조회페이지(현재 미완성->모든 사람들의 상담신청기록을 가져옴),비고란에 현재 상담상태를 표시예정</a>
+        </div>
+        <h2 style="font-family: 'Do Hyeon', sans-serif;">내가 작성한 상담신청 목록</h2>
+        <a style="font-weight:bold;font-size:13pt;">취업게시판에서 내가 작성했던 상담글을 확인할수있습니다.</a>
+        <!-- 게시글 내용 -->
+        <body>
+            <table class="table table-hover" style="margin-top: 50px;">
+                <thead>
+                    <tr>
+                        <th style="display : none;">#</th>
+                        <th style="display : none;">회원ID</th>
+                        <th width="100" style="text-align: center;">작성자</th>
+                        <th style="text-align: center;">작성날짜</th>
+                        <th style="text-align: center;">상담내용</th>
+                        <th style="text-align: center;">전화번호</th>
+                        <th style="text-align: center;">소속학교</th>
+                        <th style="text-align: center;">상담진행 상태</th>
+                        <th width="120" style="text-align: center;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mainconsult in blog_list %}
+                        <tr>
+                            <td style="display : none;">{{ mainconsult.id }}</td>
+                            <td style="display : none;">{{ mainconsult.username }}</td>
+                            <td style="text-align: center;">{{ mainconsult.name }}</td>
+                            <td style="text-align: center;">{{ mainconsult.created_at | date:'Y.m.d'}}</td>
+                            <td nowrap style="text-overflow: ellipsis; overflow:hidden; text-align: center;">{{ mainconsult.contents }}</td>
+                            <td style="text-align: center;">{{ mainconsult.phone_number }}</td>
+                            <td style="text-align: center;">{{ mainconsult.university }}</td>
+                            <td style="text-align: center;">{{ mainconsult.status }}</td>
+                            <td style="text-align: center;">
+                                <!-- Button trigger modal -->
+                                <button
+                                type="button"
+                                class="consult-view-btn"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"
+                                var popupX = (window.screen.width/2);
+                                var popupY = (window.screen.height/2);
+                                onclick="window.open('/consult2/{{ mainconsult.id }}','window_name','width=600,height=780');">내용보기
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    {% if postlist2.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?p={{ postlist2.previous_page_number }}">이전</a >
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">이전</a>
+                        </li>
+                    {% endif %}
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" href="?p=1">1</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?p=2">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?p=3">3</a>
+                        </li>
+                    </ul>
+                </li>
+                {% if postlist2.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?p={{ postlist2.next_page_number }}">다음</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">다음</a>
+                    </li>
+
+                {% endif %}
+            </ul>
+        </nav>
+    {% else %}
+        <div style="text-align: center; margin-top:155px;">
+            <img src="/media/warning.png" height="150" width="150"></div>
+        <h1
+            style="margin-top: 15px; font-family: 'Do Hyeon', sans-serif; text-align: center;">접속 권한이 없습니다.</h1><br>
+        <h1
+            style="margin-top: 15px; font-family: 'Do Hyeon', sans-serif; text-align: center;">먼저 로그인후 이용해주세요.</h1>
+    {% endif %}
+</body>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "main/base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<style>
+  html{
+    -ms-user-select: none; 
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    margin: 0;
+    padding: 0;
+  }
+  .section{
+    margin: 0;
+    width: auto;
+    height: auto;
+    top:-50px;
+  }
+</style>
+
+<body>
+    <div class="main-img">
+      <img src="media/main.jpeg" alt="메인 대문 사진">
+    </div>
+
+    <div class="text-bar">
+      <a>사회 초년생의 시작의 날개를<br>마음껏 펼쳐봐</a><br>
+      <p>지역의 좋은 일자리 정보를 찾아보세요.</p>
+      {% if user.is_authenticated %}
+      <button type="button" onclick="location.href='blog'">시작하기</button>
+      {% else %}
+      <button type="button" onclick="location.href='login'">시작하기</button>
+      {% endif %}
+    </div>
+
+    <div class="bottom">
+      <a style="font-weight: bold"> (주) 게더링</a> <a style="font-weight: bold;">이용약관 개인정보 처리방침</a>
+      <br>
+      <a>대표  김대일  | 광주광역시 동구 필문대로 289, 4층</a>
+      <br>
+      <a>사업자등록번호 105-88-16862 | 직업정보제공사업 신고번호: J1600020200001</a>
+      <br>
+      <a>Copyright @Gathering Corp. All Right Reserved</a>
+    </div>
+</body>
+</html>
+{% endblock %}

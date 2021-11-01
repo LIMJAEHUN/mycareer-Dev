@@ -1,0 +1,43 @@
+
+
+<form action="" method='GET'>
+    <div class="row" style="margin-bottom:15px;">
+        <div class="col-lg-5">
+            <div class="input-group">
+                <input type="text" class="form-control" name="search_key" value="{{ search_key }}"
+                    placeholder="looking for...">
+                <span class="input-group-btn">
+                    <input class="btn btn-default" type="submit" value="Search">
+                </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+</form>
+
+<div class="row">
+  {% for post in postlist %}
+  <tr class="text-left">
+        <th scope="row">
+            <a href="/blog/{{ post.id }}">
+          <th width = "100">
+                {% if post.rogophoto %}
+              <img src = "{{ post.rogophoto.url }}" alt="" height ="140" width="140">
+              {% endif %}
+          </th>
+          <th width = "-100">
+            <a href="/blog/{{ post.id }}">
+            <span>{{ post.num }}</span>
+            <span>{{ post.postname|truncatechars:30}}</span>
+            <br>
+            <span>{{ post.author }}</span>
+            <br>
+            <span>{{ post.jop }}</span>
+            <br>
+            <span>{{ post.write }}</span>
+            <br>
+            <span>{{ post.created_date | date:"Y-m-d h:i" }}</span>
+          </th>
+        </a>
+        {% endfor %}
+    </div>
+</div>

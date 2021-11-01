@@ -1,0 +1,130 @@
+<head>
+    <style>
+        body {
+        padding: 0;
+        margin: 0;
+        }
+        input[type="checkbox"] {
+            display: none;
+        }
+        label {
+            display: inline-block;
+            border-radius: 20px;
+            text-align: center;
+            text-decoration: none;
+            border: solid 1px #ccc;
+            transition: 0.25s;
+            padding: 6px 18px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 3px;
+        }
+        input[type="checkbox"]:checked + label {
+        background: #1b5ac2;
+        color: #fff;
+        }
+
+        .delete-btn {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        font-weight: bolder;
+        font-size:15px;
+        height: 25px;
+        width: 25px;
+        padding: 0%;
+        margin-left: 10px;
+        float:inline-end;
+        background-color: #f7f7f7;
+        color: gray;
+        border-radius: 70%;
+        font-family: 'Noto Sans KR', sans-serif;
+        /*width: 20px;
+                text-indent: 10px;
+        height:20px;
+        text-align: center;
+        padding: 0;
+        margin: 5px;
+        border: 1px solid black;
+        border-radius: 70%;
+        background-color: transparent;
+        color: orange;*/
+        }
+        .sidebar{
+        display: inline-block;
+        position:sticky;
+        top:540px;
+        }
+
+    .container-mark{
+      width:1200px;
+      margin:0 auto;
+
+    }
+    </style>
+</head>
+<body>
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+{%csrf_token %}
+<div class="container-mark">
+    <h1>즐겨찾기</h1>
+    <div class="row mt-5">
+        <div class="col-12">
+            <table class="table" width="400">
+                <tbody>
+                  {% for mark_item in mark_items %}
+                  <tr class="text-left">
+                      <th width = "-100">
+                          <a href="/blog/{{MarkItem.MainPost_id }}">
+                          <span>{{mark_item.MainPost.id}}</span>
+                          <span>{{mark_item.MainPost.postname}}</span>
+                          <br/>
+                          {% if mark_item.MainPost.rogophoto %}
+                          <img style="object-fit : contain;" class="logo_img"src = "{{ mark_item.MainPost.rogophoto.url }}" alt="" height ="90" width=" 90">
+                          {% endif %}
+
+                          {% endfor %}
+  {% comment %} 페이지 이동 버튼 {% endcomment %}
+  <div class="row mt-2">
+    <div class="col-12">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+        {% comment %} Previous {% endcomment %}
+        {% if eduposts.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ eduposts.previous_page_number }}">Previous</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#">Previous</a>
+          </li>
+        {% endif %}
+        {% comment %} PageNum {% endcomment %}
+        {% for pageNum in eduposts.paginator.page_range %}
+        {% if pageNum >= eduposts.number|add:-5 and pageNum <= eduposts.number|add:5 %}
+          {% if pageNum == eduposts.number%}
+            <li class="page-item active" area-current="page">
+              <a class="page-link" href="?page={{pageNum}}">{{pageNum}}</a>
+            </li>
+          {% else %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{pageNum}}">{{pageNum}}</a>
+            </li>
+          {% endif %}
+        {% endif %}
+        {% endfor %}
+        {% comment %} Next {% endcomment %}
+        {% if eduposts.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{eduposts.next_page_number}}">Next</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        {% endif %}
+  </div>
+</body>
+{% endblock%}
